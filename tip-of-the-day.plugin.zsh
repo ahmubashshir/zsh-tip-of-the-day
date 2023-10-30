@@ -38,7 +38,7 @@ tip-of-the-day()
 
 	if (($#__zsh_loaded_tips > 0));then
 		builtin print -Pnf '%szsh:%s Did you know?%s\n' '%B%F{green}' '%f%F{blue}' '%f%b'
-		builtin printf '|\t%s\n' ${(@f)"${__zsh_loaded_tips[RANDOM % $#__zsh_loaded_tips + 1]}"}
+		builtin printf '|\t%s\n' "${${(@f)"${__zsh_loaded_tips[RANDOM % $#__zsh_loaded_tips + 1]}"}[@]#$'\t'}"
 	fi
 }
 
