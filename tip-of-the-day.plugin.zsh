@@ -22,7 +22,15 @@ tip-of-the-day()
 {
 	[[ -t 1 ]] || return
 	if [[ ${#__zsh_loaded_tips[@]} -eq 0 || $1 == --reload ]]; then
-		builtin source "$__zsh_tips_file"
+		local is_tips_enabled_for="::$RANDOM/is_tips_enabled_for/$$"
+		local -a tips=()
+		function "$is_tips_enabled_for" {
+			[[ $#zsh_load_tips -eq 0 || ${zsh_load_tips[(r)"$1"]} == "$1" ]]
+		}
+
+		builtin source "$__zsh_tips_file" && __zsh_loaded_tips=("${tips[@]}")
+
+		unset "functions[$is_tips_enabled_for]" is_tips_enabled_for tips
 	fi
 
 	if (($#__zsh_loaded_tips > 0));then
