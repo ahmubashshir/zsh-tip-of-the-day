@@ -35,3 +35,10 @@ $'You can follow log path in realtime using
 \t`tail -F <path>`
 this continue to work even after log rotation'
 )
+
+# Git tips
+$is_tips_enabled_for git && tips+=(
+# git-commit-empty-message
+$'You can commit with no message with
+\t`git commit --allow-empty`'
+)
